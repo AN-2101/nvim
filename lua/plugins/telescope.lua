@@ -5,7 +5,26 @@ return {
   module = "telescope",
 
   config = function()
-    require('telescope').setup({})
+    local action_layout = require("telescope.actions.layout")
+    require('telescope').setup({
+      defaults = {
+        mappings = {
+          n = {
+            ["j"] = actions.move_selection_next,
+            ["k"] = actions.move_selection_previous,
+            ["<M-p>"] = action_layout.toggle_preview},
+          i = {
+            ["<M-p>"] = action_layout.toggle_preview},
+            ["<C-j>"] = actions.move_selection_next,
+            ["<C-k>"] = actions.move_selection_previous,
+
+            -- optional: disable Alt bindings if you want clean config
+            ["<M-j>"] = false,
+            ["<M-k>"] = false,
+          }
+        }
+      }
+    )
 
     local builtin = require('telescope.builtin')
 

@@ -36,6 +36,7 @@ local options = {
   sidescrolloff = 4,
   --guifont = "Cascadia_Mono:h10",
   guifont = "JetBrainsMono_Nerd_Font:h11",
+  wrap=true
 }
 
 for k, v in pairs(options) do

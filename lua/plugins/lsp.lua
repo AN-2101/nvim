@@ -1,55 +1,29 @@
 return {
-  "neovim/nvim-lspconfig",
-  dependencies = {
+  {
     "williamboman/mason.nvim",
+    config = function()
+      require("mason").setup()
+    end,
+  },
+ 
+ -- Bridge between mason and nvim-lspconfig
+  {
     "williamboman/mason-lspconfig.nvim",
-    "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/nvim-cmp",
+    dependencies = { "williamboman/mason.nvim" },
+    config = function()
+      require("mason-lspconfig").setup({
+        ensure_installed = {clangd}, -- auto install clangd
+      })
+    end,
   },
 
-  config = function()
-    vim.api.nvim_create_autocmd('LspAttach', {
-      desc = 'LSP actions',
-      callback = function(event)
-        local opts = {buffer = event.buf}
-
-        vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
-        vim.keymap.set('n', '<leader>k', '<cmd>lua vim.diagnostic.open_float()<cr>', opts)
-        vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
-        vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', opts)
-        vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
-        vim.keymap.set('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
-        vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
-        vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
-        vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-        vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
-      end,
-    })
-
-
-    -- Mason setup
-    require("mason").setup({
-      ensure_installed = {
-      },
-    })
-
-    -- Mason-lspconfig setup
-    require("mason-lspconfig").setup({
-      handlers = {
-        -- Default handler for automatically configuring installed servers
-        function(server_name)
-          require("lspconfig")[server_name].setup({}) end,
-
-        -- You can add custom handlers for specific servers here
-        -- For example:
-        -- tsserver = function(_, opts)
-        --   require("lspconfig").tsserver.setup(opts)
-        -- end,
-      },
-    })
-
-    local cmp = require("cmp")
-
+  {
+    "hrsh7th/nvim-cmp",
+  dependencies = {
+    "hrsh7th/cmp-nvim-lsp",
+      "L3MON4D3/LuaSnip",
+  },
+    config = function()
     --   פּ ﯟ   some other good icons
     local kind_icons = {
       Text = "",
@@ -79,7 +53,7 @@ return {
       TypeParameter = "",
     }
     -- find more here: https://www.nerdfonts.com/cheat-sheet
-
+    local cmp = require("cmp")
     cmp.setup({
       sources = {
         {name = "nvim_lsp"},
@@ -138,5 +112,6 @@ return {
     }
   })
   end
+}
 }
 
