@@ -35,11 +35,6 @@ keymap("n", "<C-u>", "<C-u>zz", opts)
 
 --keymap("n", "<leader>e", ":Lex 30<cr>", opts)
 
--- Resize with arrows
-keymap("n", "<C-Up>", ":resize -1<CR>", opts)
-keymap("n", "<C-Down>", ":resize +1<CR>", opts)
-keymap("n", "<C-Left>", ":vertical resize +1<CR>", opts)
-keymap("n", "<C-Right>", ":vertical resize -1<CR>", opts)
 
 -- Navigate buffers
 keymap("n", "<S-l>", ":bnext<CR>", opts)
@@ -87,4 +82,9 @@ keymap("n", "<C-Down>", ":resize +2<CR>", opts)
 keymap("n", "<C-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<C-Right>", ":vertical resize +2<CR>", opts)
 
-keymap("n", "<leader>s", ":w", opts)
+keymap("n", "<leader>s", ":w<CR>", opts)
+
+-- Markdown preview with glow
+vim.keymap.set("n", "<leader>mm", function()
+  vim.cmd("vsplit | terminal glow " .. vim.fn.expand("%:p"))
+end, { desc = "Markdown compile (glow)", silent = true })
