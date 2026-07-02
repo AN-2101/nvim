@@ -74,7 +74,7 @@ keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
 -- Split creation
 keymap("n", "<leader>|", "<C-w>v", opts) -- vertical split
 keymap("n", "<leader>-", "<C-w>s", opts) -- horizontal split
-keymap("n", "<leader>q", ":close<CR>", opts) -- close
+keymap("n", "<leader>q", ":bd<CR>", opts) -- close
 
 -- Resize (very practical)
 keymap("n", "<C-Up>", ":resize -2<CR>", opts)
