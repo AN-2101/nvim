@@ -1,6 +1,6 @@
 return {
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     config = function()
       require("mason").setup()
     end,
@@ -8,8 +8,8 @@ return {
  
  -- Bridge between mason and nvim-lspconfig
   {
-    "williamboman/mason-lspconfig.nvim",
-    dependencies = { "williamboman/mason.nvim" },
+    "mason-org/mason-lspconfig.nvim",
+    dependencies = { "mason-org/mason.nvim" },
     config = function()
       require("mason-lspconfig").setup({
         ensure_installed = {clangd}, -- auto install clangd
