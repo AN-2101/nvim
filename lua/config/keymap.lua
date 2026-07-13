@@ -39,6 +39,7 @@ keymap("n", "<C-u>", "<C-u>zz", opts)
 -- Navigate buffers
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
+keymap("n", "<Tab>", "<cmd>b#<cr>", { desc = "Toggle previous buffer" })
 
 -- Insert --
 -- Press jk fast to enter
